@@ -1,0 +1,13 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/ccontavalli/grub-shusher.git
+	branch = master
+	commit = f00f43486392eca910042656b90914827dc50381
+	parent = e638fe44cbdb874217a02ec9632d5a12a564ac80
+	method = merge
+	update = auto
+	cmdver = 0.4.1

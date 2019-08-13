@@ -36,7 +36,16 @@ StandardOutput=null
 StandardError=journal+console
 ```
 
-### Programs You can install
+####  To remove `GRUB loading. Weclome to GRUB!` on boot
+##### Only for systems with efi
+```sh
+cd grub-shusher
+make
+sudo -s
+./grub-kernel /boot/efi/EFI/***/grubx64.efi
+```
+
+### Programs You Can Install
 * **preload** - Caches programs you use in RAM to launch faster
 * **dbus-broker** - is a drop-in replacement for the libdbus reference implementation, which aims "to provide high performance and reliability, while keeping compatibility to the D-Bus reference implementation".
 * **irqbalance** - distribute hardware interrupts across processors on a multiprocessor system in order to increase performance

@@ -8,11 +8,32 @@ sudo cp etc/udev/rules.d/* /etc/udev/rules.d/ # may have to make rules.d
 sudo cp etc/makepkg.conf /etc/makepkg.conf
 ```
 
+
+### Silent Boot
+On most modern system the boot time can be decreased by limiting the verbosity of their system to a strict minimum, it is also much more aesthetically pleasing.
+
 edit /etc/default/grub lines `GRUB_CMDLINE_LINUX` & `GRUB_CMDLINE_LINUX_DEFAULT`
 
 ```sh
 GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3 vt.global_cursor_default=0 i915.fastboot=1"
 GRUB_CMDLINE_LINUX="quiet loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3 vt.global_cursor_default=0 i915.fastboot=1"
+```
+
+edit `/etc/sysctl.d/20-quiet-printk.conf`
+```sh
+kernel.printk = 3 3 3 3
+```
+
+```sh
+systemctl edit --full systemd-fsck-root.service
+systemctl edit --full systemd-fsck@.service
+```
+
+add these two lines between `ExecStart=/usr/lib/systemd/systemd-fsck` & `TimeoutSec=0`
+
+```sh
+StandardOutput=null
+StandardError=journal+console
 ```
 
 ### Programs You can install
@@ -46,3 +67,7 @@ For usage:
 * [Standalone](https://wiki.archlinux.org/index.php/Iwd#iwctl)
 * [ConnMan](https://wiki.archlinux.org/index.php/ConnMan#Using_iwd_instead_of_wpa_supplicant)
 * [NetworkManager](https://wiki.archlinux.org/index.php/NetworkManager#Using_iwd_as_the_Wi-Fi_backend)
+
+### Notes
+For KDE Desktop Environment Users:
+Set splash theme to none
